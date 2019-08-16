@@ -3,13 +3,13 @@ import numpy as np
 
 def get_closest_color(available_pixel, chosen_pixel):
     distances = []
-
+    
     for key, value in available_pixel.items():
         a1 = np.asarray(value)
         c1 = np.asarray(chosen_pixel)
         curr_dist = np.linalg.norm(a1 - c1)
         distances += [curr_dist]
-        if(curr_dist == min(distances)):
+        if(curr_dist <= min(distances)):
             curr_key = key
 
     return curr_key
