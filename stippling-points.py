@@ -3,9 +3,6 @@ import random
 import sys
 import numpy as np
 
-sys.path.append("..")
-from Digital_Painter import digital_painter as dp
-
 #image is expected to be a grayscale cv2 image
 def stippling_points(image):
     points = []
@@ -24,12 +21,9 @@ print(im)
 points = stippling_points(im)
 print(points)
 
-dp = dp.DigitalWriter("../Stippling-Points/")
-
 white = [[[255,255,255] for x in range(len(im[0]))] for x in range(len(im))]
 
 white = np.asarray(white)
-#dp.plot_lines(points, white, "output.jpeg")
 
 
 for point in points:
