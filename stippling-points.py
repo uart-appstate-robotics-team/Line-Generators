@@ -1,0 +1,38 @@
+import cv2
+import random
+import sys
+import numpy as np
+
+sys.path.append("..")
+from Digital_Painter import digital_painter as dp
+
+#image is expected to be a grayscale cv2 image
+def stippling_points(image):
+    points = []
+
+    for i, row in enumerate(image):
+        for j, col in enumerate(image[i]):
+            r = random.randint(0,255)
+            if (r >= image[i][j]):
+                points.append([(i,j), (i,j)]) #makes two points because thats what the digital painter needs to draw lines
+
+    return points
+
+
+im = cv2.imread("./download.jpeg", cv2.IMREAD_GRAYSCALE)
+print(im)
+points = stippling_points(im)
+print(points)
+
+dp = dp.DigitalWriter("../Stippling-Points/")
+
+white = [[[255,255,255] for x in range(len(im[0]))] for x in range(len(im))]
+
+white = np.asarray(white)
+#dp.plot_lines(points, white, "output.jpeg")
+
+
+for point in points:
+    white[point[0][0]][point[0][1]] = [0,0,0]
+
+cv2.imwrite("output.jpeg", white)
