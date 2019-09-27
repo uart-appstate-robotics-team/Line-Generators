@@ -11,7 +11,7 @@ def stippling_points(image):
         for j, col in enumerate(image[i]):
             r = random.randint(0,255)
             if (r >= image[i][j]):
-                points.append([(i,j), (i,j)]) #makes two points because thats what the digital painter needs to draw lines
+                points.append([(i,j)])
 
     return points
 
