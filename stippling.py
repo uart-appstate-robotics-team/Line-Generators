@@ -20,10 +20,10 @@ def get_closest_color(self, chosen_pixel):
 
     return curr_key
 
-
+#
 # image is expected to be a grayscale cv2 image
+# 
 def stippling_points(image):
-    image = np.transpose(image)
     points = []
 
     for i, row in enumerate(image):
@@ -31,19 +31,18 @@ def stippling_points(image):
             r = random.randint(0, 255)
             if r > image[i][j]:
                 points.append([(j, i)])
-
     return points
-
+#
 # image is expected to be a grayscale cv2 image
+# 
 def stippling_points_jitter(image):
-    image = np.transpose(image)
     points = []
 
     for i, row in enumerate(image):
         for j, col in enumerate(image[i]):
             r = random.randint(0, 255)
             if r > image[i][j]:
-                points.append([(j + random.uniform(-.3,.3), i + random.uniform(-.3,.3))])
+                points.append([(j + np.random.normal(0,.3,None), i + np.random.uniform(0,.3,None))])
 
     return points
 
@@ -57,7 +56,7 @@ def darken_edges(image, darken):
     sys.path.append('..')
     from EdgePoints import edgepoints as ep
 
-    edges = cv2.Canny(image, 100, 200)
+    edges = cv2.Canny(image, 50, 100)
 
     edge_points = ep.generate_edgepoints(edges)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
@@ -89,15 +88,15 @@ def color_generator(n):
     return color
 
 
-
-#im = cv2.imread("./sphere.jpg", cv2.IMREAD_GRAYSCALE)
+#
+#im = cv2.imread("./rose-small-gs-400.jpg", cv2.IMREAD_GRAYSCALE)
 #im = np.transpose(im)
-## print(im)
-#im = darken_edges(im, 100)
+#im = darken_edges(im, 200)
+#
 #jpoints = stippling_points_jitter(im)
 #points = stippling_points(im)
 #cv2.imwrite("darkened.png",im)
-#print(points)
+#print(jpoints)
 ##print(color_generator(5))
 #
 #white = [[[255, 255, 255] for x in range(len(im[0]))] for x in range(len(im))]
@@ -108,6 +107,5 @@ def color_generator(n):
 #    white[point[0][0]][point[0][1]] = [0, 0, 0]
 #
 #cv2.imwrite("output.png", white)
-#
 #
 #
