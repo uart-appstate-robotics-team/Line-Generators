@@ -48,7 +48,11 @@ def stippling_points_jitter(image):
 
 
 #
-# runs edgepoints, goes to the designated edgepoints and darkens them by a parameterized value
+# runs edgepoints, goes to the designated edgepoints and darkens them by a 
+# parameterized value
+#
+# for some reason the image is some combination or rotations and transposes and 
+# I don't know why
 #
 
 def darken_edges(image, darken):
@@ -78,7 +82,7 @@ def darken_edges(image, darken):
 # the number of colors in between is determined by n
 # len(colors) = n+2
 # colors[0] = black
-# colors[1] = white
+# colors[-1] = white
 #
 def color_generator(n):
     n += 1
@@ -89,23 +93,36 @@ def color_generator(n):
 
 
 #
-#im = cv2.imread("./rose-small-gs-400.jpg", cv2.IMREAD_GRAYSCALE)
-#im = np.transpose(im)
-#im = darken_edges(im, 200)
+# saves a digital stippling image to ./outputs
+# 
+# @param fn: string filename of an image you would like to generate digital 
+# stippling of
 #
-#jpoints = stippling_points_jitter(im)
-#points = stippling_points(im)
-#cv2.imwrite("darkened.png",im)
-#print(jpoints)
-##print(color_generator(5))
-#
-#white = [[[255, 255, 255] for x in range(len(im[0]))] for x in range(len(im))]
-#
-#white = np.asarray(white)
-#
-#for point in points:
-#    white[point[0][0]][point[0][1]] = [0, 0, 0]
-#
-#cv2.imwrite("output.png", white)
-#
-#
+def main(fn):
+    im = cv2.imread(fn, cv2.IMREAD_GRAYSCALE)
+    im = np.transpose(im)
+    im = darken_edges(im, 200)
+
+    jpoints = stippling_points_jitter(im)
+    points = stippling_points(im)
+    print("saving darkened-edge image")
+    cv2.imwrite("./outputs/darkened.png",im)
+
+    #print(jpoints)
+    #print(color_generator(5))
+
+    white = [[[255, 255, 255] for x in range(len(im[0]))] for x in range(len(im))]
+
+    white = np.asarray(white)
+
+    for point in points:
+        white[point[0][0]][point[0][1]] = [0, 0, 0]
+
+    cv2.imwrite("./outputs/output.png", white)
+    print("saving output image")
+
+if __name__ == "__main__":
+    FILENAME = "./davidlynchportrait.png"
+    main(FILENAME)
+
+
