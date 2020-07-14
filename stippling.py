@@ -60,7 +60,7 @@ def darken_edges(image, darken):
     sys.path.append('..')
     from EdgePoints import edgepoints as ep
 
-    edges = cv2.Canny(image, 50, 100)
+    edges = cv2.Canny(image, 125, 150)
 
     edge_points = ep.generate_edgepoints(edges)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
@@ -68,7 +68,7 @@ def darken_edges(image, darken):
 
     for line in edge_points:
         for point in line:
-            print(point)
+            #print(point)
             if image[point[0]][point[1]] < darken:
                 image[point[0]][point[1]] = 0
             else:
@@ -101,7 +101,7 @@ def color_generator(n):
 def main(fn):
     im = cv2.imread(fn, cv2.IMREAD_GRAYSCALE)
     im = np.transpose(im)
-    im = darken_edges(im, 200)
+    im = darken_edges(im, 120)
 
     jpoints = stippling_points_jitter(im)
     points = stippling_points(im)
@@ -122,7 +122,7 @@ def main(fn):
     print("saving output image")
 
 if __name__ == "__main__":
-    FILENAME = "./davidlynchportrait.png"
+    FILENAME = "./davidlynchportrait400-modified.png"
     main(FILENAME)
 
 
