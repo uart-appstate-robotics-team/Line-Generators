@@ -58,7 +58,7 @@ def stippling_points_jitter(image):
 def darken_edges(image, darken):
     image = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
     sys.path.append('..')
-    from EdgePoints import edgepoints as ep
+    from edge_points import edgepoints as ep
 
     edges = cv2.Canny(image, 125, 150)
 
@@ -122,7 +122,7 @@ def main(fn):
     print("saving output image")
 
 if __name__ == "__main__":
-    FILENAME = "./davidlynchportrait400-modified.png"
+    FILENAME = "./images/BlueRidgeMountains.jpg"
     main(FILENAME)
 
 

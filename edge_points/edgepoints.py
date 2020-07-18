@@ -108,7 +108,7 @@ def is_adjacent(current_coord, last_in_line):
 
 
 def generate_edgepoints(edges):
-    cv2.imwrite('./edges.png', edges)
+    cv2.imwrite('./outputs/edges.png', edges)
     checked = [ [False for x in edges[0]] for x in edges]
 
     #rotates and flips image to fix the flipping and rotating that happens during linecheck
