@@ -107,7 +107,11 @@ def is_adjacent(current_coord, last_in_line):
         return False
 
 
-def generate_edgepoints(edges):
+#
+#
+# @param edges: edge image to be traced along
+#
+def generate(edges):
     cv2.imwrite('./outputs/edges.png', edges)
     checked = [ [False for x in edges[0]] for x in edges]
 

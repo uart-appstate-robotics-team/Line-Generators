@@ -48,6 +48,18 @@ def stippling_points_jitter(image):
 
 
 #
+# wrapper function for consistency
+#
+# @param image: image to be drawn
+# @param jitter: controls whether or not jitter is added to the points or not
+#
+def generate(image, jitter=True):
+    if jitter:
+        return stippling_points_jitter(image)
+    else:
+        return stippling_points(image)
+
+#
 # runs edgepoints, goes to the designated edgepoints and darkens them by a 
 # parameterized value
 #

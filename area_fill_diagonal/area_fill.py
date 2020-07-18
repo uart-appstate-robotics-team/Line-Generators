@@ -20,9 +20,15 @@ def flipredblue(pixel):
     return [pixel[2],pixel[1],pixel[0]]
 
 #
-# generates lines that draws diagnol lines to fill adjacent spaces with their closest color
+# generates lines that draws diagnol lines to fill adjacent spaces with their 
+# closest color
+# 
+# @param image: image that you want to paint/draw
+# @param color_dict: parameter that defines which colors you want to fill
 #
-def generate_diagnolfill(image, color_dict):
+black_and_white = {"black": [0,0,0],
+                   "white": [255,255,255]}
+def generate(image, color_dict=black_and_white):
     print(color_dict)
 
     diag_list = list(range(len(image),0,-1))
@@ -60,7 +66,10 @@ def generate_diagnolfill(image, color_dict):
 
     return lines
 
-#colors = {'red':[255,0,0], 'green':[0,255,0], 'blue':[0,0,255],'magenta':[255,0,255], 'tomato':[255,99,71], 'lawn green':[124,252,0], 'yellow':[255,217,41]}
-#img = cv2.imread("./flower.jpg")
-#lines = generate_diagnol_fill(img,colors)
-#print(lines)
+def main():
+    colors = {'red':[255,0,0], 'green':[0,255,0], 'blue':[0,0,255],'magenta':[255,0,255], 'tomato':[255,99,71], 'lawn green':[124,252,0], 'yellow':[255,217,41]}
+    img = cv2.imread("./flower.jpg")
+    lines = generate_diagnol_fill(img,colors)
+    print(lines)
+
+
