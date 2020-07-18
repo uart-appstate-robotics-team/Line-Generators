@@ -111,9 +111,9 @@ def generate_edgepoints(edges):
     cv2.imwrite('./edges.png', edges)
     checked = [ [False for x in edges[0]] for x in edges]
 
-#rotates and flips image to fix the flipping and rotating that happens during linecheck
-    edges = cv2.flip(edges, 0)
-    edges = imutils.rotate_bound(edges, 90)
+    #rotates and flips image to fix the flipping and rotating that happens during linecheck
+    #edges = cv2.flip(edges, 0)
+    #edges = imutils.rotate_bound(edges, 90)
 
     lineno = [0] #do this so lineno is passed by reference, there are better ways but this is easy
     #good luck future self
